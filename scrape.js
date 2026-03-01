@@ -5,16 +5,16 @@ const { chromium } = require('playwright');
   const page = await browser.newPage();
 
   const seedUrls = [
-    'https://exam.tools.ds.study.iitm.ac.in/ga4?seed=79',
-    'https://exam.tools.ds.study.iitm.ac.in/ga4?seed=80',
-    'https://exam.tools.ds.study.iitm.ac.in/ga4?seed=81',
-    'https://exam.tools.ds.study.iitm.ac.in/ga4?seed=82',
-    'https://exam.tools.ds.study.iitm.ac.in/ga4?seed=83',
-    'https://exam.tools.ds.study.iitm.ac.in/ga4?seed=84',
-    'https://exam.tools.ds.study.iitm.ac.in/ga4?seed=85',
-    'https://exam.tools.ds.study.iitm.ac.in/ga4?seed=86',
-    'https://exam.tools.ds.study.iitm.ac.in/ga4?seed=87',
-    'https://exam.tools.ds.study.iitm.ac.in/ga4?seed=88',
+    'https://sanand0.github.io/tdsdata/js_table/?seed=79',
+    'https://sanand0.github.io/tdsdata/js_table/?seed=80',
+    'https://sanand0.github.io/tdsdata/js_table/?seed=81',
+    'https://sanand0.github.io/tdsdata/js_table/?seed=82',
+    'https://sanand0.github.io/tdsdata/js_table/?seed=83',
+    'https://sanand0.github.io/tdsdata/js_table/?seed=84',
+    'https://sanand0.github.io/tdsdata/js_table/?seed=85',
+    'https://sanand0.github.io/tdsdata/js_table/?seed=86',
+    'https://sanand0.github.io/tdsdata/js_table/?seed=87',
+    'https://sanand0.github.io/tdsdata/js_table/?seed=88',
   ];
 
   let grandTotal = 0;
@@ -22,6 +22,9 @@ const { chromium } = require('playwright');
   for (const url of seedUrls) {
     try {
       await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
+
+      // Wait for JS-rendered table to appear
+      await page.waitForSelector('table', { timeout: 15000 });
 
       // Extract all numbers from all table cells
       const numbers = await page.$$eval('table td, table th', cells =>
